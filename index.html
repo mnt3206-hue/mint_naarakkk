@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="th" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>บทเรียนออนไลน์ วิทยาการคำนวณ ป.1 - การคัดเลือกคุณลักษณะที่จำเป็น</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        pastelPink: '#ffd1dc',
+                        pastelBlue: '#c1f0f6',
+                        pastelYellow: '#fff9b1',
+                        pastelGreen: '#d4edda',
+                        pastelPurple: '#e2d9fc',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts: Prompt -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Prompt', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .bubble-shadow {
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.15), 0 8px 10px -6px rgba(59, 130, 246, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-pink-50 via-sky-50 to-amber-50 dark:from-slate-900 dark:via-purple-950 dark:to-slate-900 text-slate-700 dark:text-slate-200 antialiased selection:bg-pink-300 selection:text-pink-900 min-h-screen flex flex-col justify-between">
+
+    <header class="bg-gradient-to-r from-pink-400 via-purple-400 to-sky-400 dark:from-pink-900 dark:via-purple-900 dark:to-sky-900 text-white shadow-lg sticky top-0 z-50 transition-colors">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="bg-white text-pink-500 p-3 rounded-2xl shadow-md text-2xl font-bold animate-bounce">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl sm:text-2xl font-extrabold tracking-wide">ห้องเรียนพี่หุ่นยนต์ AI</h1>
+                    <p class="text-xs sm:text-sm text-pink-100 font-medium">วิทยาการคำนวณ ชั้นประถมศึกษาปีที่ 1</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3 flex-wrap justify-center">
+                <nav class="flex flex-wrap gap-2 text-xs sm:text-sm font-semibold">
+                    <a href="#welcome" class="bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-full transition"><i class="fa-solid fa-house mr-1"></i> หน้าแรก</a>
+                    <a href="#student-info" class="bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-full transition"><i class="fa-solid fa-id-card mr-1"></i> ลงทะเบียน</a>
+                    <a href="#pretest" class="bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-full transition"><i class="fa-solid fa-clipboard-question mr-1"></i> แบบทดสอบ</a>
+                    <a href="#board" class="bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-full transition"><i class="fa-solid fa-comments mr-1"></i> กระดาน</a>
+                    <a href="#lessons" class="bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-full transition"><i class="fa-solid fa-book-open mr-1"></i> บทเรียน</a>
+                    <a href="#activity" class="bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-full transition"><i class="fa-solid fa-gamepad mr-1"></i> กิจกรรม</a>
+                    <a href="#submit-work" class="bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-full transition"><i class="fa-solid fa-upload mr-1"></i> ส่งงาน</a>
+                </nav>
+                <!-- Theme Toggle Button -->
+                <button onclick="toggleTheme()" class="bg-white/30 hover:bg-white/40 text-white p-2.5 rounded-full transition shadow-md" title="สลับโหมดกลางวัน/กลางคืน">
+                    <i id="theme-icon" class="fa-solid fa-moon text-lg"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-12 w-full flex-1">
+        <!-- Welcome Section -->
+        <section id="welcome" class="bg-gradient-to-b from-yellow-100 to-amber-50 dark:from-slate-800 dark:to-slate-800/80 rounded-3xl p-8 sm:p-12 text-center border-4 border-yellow-300 dark:border-amber-700 bubble-shadow relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 text-yellow-200/50 dark:text-slate-700/30 text-9xl pointer-events-none">
+                <i class="fa-solid fa-star"></i>
+            </div>
+            <span class="bg-yellow-400 text-yellow-900 dark:bg-amber-600 dark:text-amber-100 text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full uppercase tracking-wider inline-block mb-4 shadow-sm">
+                🎉 หน่วยการเรียนรู้ที่ 1
+            </span>
+            <h2 class="text-3xl sm:text-5xl font-extrabold text-slate-800 dark:text-slate-100 mb-4 leading-tight">
+                การคัดเลือกคุณลักษณะที่จำเป็น <br class="hidden sm:inline"><span class="text-pink-500 dark:text-pink-400">ต่อการแก้ปัญหา</span>
+            </h2>
+            <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-8">
+                มาเรียนรู้เคล็ดลับการมองหา <strong>"สิ่งสำคัญ"</strong> และตัดสิ่งที่ไม่จำเป็นออกไป เพื่อให้เราแก้ปัญหาได้อย่างรวดเร็วและสนุกสนานกันเถอะ!
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#student-info" class="bg-pink-500 hover:bg-pink-600 text-white font-bold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition text-lg flex items-center gap-2">
+                    <i class="fa-solid fa-pen"></i> กรอกชื่อและเริ่มเรียนเลย
+                </a>
+            </div>
+        </section>
+
+        <section id="student-info" class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-10 border-2 border-indigo-100 dark:border-indigo-900 shadow-sm transition-colors">
+            <div class="flex items-center space-x-3 mb-6">
+                <div class="bg-indigo-100 dark:bg-indigo-900/60 text-indigo-500 dark:text-indigo-300 p-3 rounded-2xl text-xl">
+                    <i class="fa-solid fa-user-pen"></i>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold text-slate-800 dark:text-slate-100">ลงชื่อเข้าสู่ระบบห้องเรียน</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">กรุณากรอกชื่อ-นามสกุล และเลขที่ของนักเรียนก่อนทำกิจกรรม</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 bg-indigo-50/50 dark:bg-indigo-950/40 p-6 rounded-2xl border border-indigo-100 dark:border-indigo-900">
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">ชื่อ - นามสกุล:</label>
+                    <input type="text" id="student-name" placeholder="เช่น ด.ช. รักเรียน เพียรศึกษา" class="w-full px-4 py-3 rounded-xl border border-indigo-200 dark:border-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100">
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">ชั้น / ห้อง:</label>
+                    <input type="text" id="student-class" value="ป.1/1" class="w-full px-4 py-3 rounded-xl border border-indigo-200 dark:border-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100">
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">เลขที่:</label>
+                    <input type="number" id="student-no" placeholder="เช่น 15" class="w-full px-4 py-3 rounded-xl border border-indigo-200 dark:border-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100">
+                </div>
+            </div>
+            <div class="mt-4 text-right">
+                <button onclick="saveStudentInfo()" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold px-6 py-2.5 rounded-xl transition text-sm shadow-md">
+                    <i class="fa-solid fa-check mr-1"></i> บันทึกข้อมูลนักเรียน
+                </button>
+            </div>
+        </section>
+
+        <section id="pretest" class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-10 border-2 border-amber-100 dark:border-amber-900 shadow-sm transition-colors">
+            <div class="flex items-center space-x-3 mb-6">
+                <div class="bg-amber-100 dark:bg-amber-900/60 text-amber-600 dark:text-amber-400 p-3 rounded-2xl text-xl">
+                    <i class="fa-solid fa-clipboard-question"></i>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold text-slate-800 dark:text-slate-100">แบบทดสอบวัดความรู้ก่อนเรียน (Pre-Test)</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">ลองทำดูก่อนเรียนนะคะ เด็กๆ จะได้รู้ว่าเรามีความรู้พื้นฐานเรื่องไหนบ้าง (5 ข้อ)</p>
+                </div>
+            </div>
+
+            <div class="space-y-6" id="pretest-form">
+                <!-- Q1 -->
+                <div class="p-5 bg-amber-50/50 dark:bg-amber-950/30 rounded-2xl border border-amber-100 dark:border-amber-900">
+                    <p class="font-bold text-slate-800 dark:text-slate-200 mb-3">1. หากนักเรียนต้องการเดินทางไป "เที่ยวทะเล" สิ่งใดมีความจำเป็นมากที่สุด?</p>
+                    <div class="space-y-2 text-sm">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 hover:bg-amber-100/50 dark:hover:bg-amber-900/40 rounded-lg">
+                            <input type="radio" name="q1" value="a" class="w-4 h-4 text-amber-500">
+                            <span class="text-slate-700 dark:text-slate-300">ก. ชุดว่ายน้ำ และครีมกันแดด</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 hover:bg-amber-100/50 dark:hover:bg-amber-900/40 rounded-lg">
+                            <input type="radio" name="q1" value="b" class="w-4 h-4 text-amber-500">
+                            <span class="text-slate-700 dark:text-slate-300">ข. เสื้อกันหนาวตัวหนาและถุงมือขนสัตว์</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="p-5 bg-amber-50/50 dark:bg-amber-950/30 rounded-2xl border border-amber-100 dark:border-amber-900">
+                    <p class="font-bold text-slate-800 dark:text-slate-200 mb-3">2. การเลือกเฉพาะ "สิ่งสำคัญ" ที่ต้องใช้แก้ปัญหา และตัดสิ่งไม่จำเป็นออก เรียกว่าอะไร?</p>
+                    <div class="space-y-2 text-sm">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 hover:bg-amber-100/50 dark:hover:bg-amber-900/40 rounded-lg">
+                            <input type="radio" name="q2" value="a" class="w-4 h-4 text-amber-500">
+                            <span class="text-slate-700 dark:text-slate-300">ก. การเล่นเกมสนุกสนาน</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 hover:bg-amber-100/50 dark:hover:bg-amber-900/40 rounded-lg">
+                            <input type="radio" name="q2" value="b" class="w-4 h-4 text-amber-500">
+                            <span class="text-slate-700 dark:text-slate-300">ข. การคัดเลือกคุณลักษณะที่จำเป็นต่อการแก้ปัญหา</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Q3 -->
+                <div class="p-5 bg-amber-50/50 dark:bg-amber-950/30 rounded-2xl border border-amber-100 dark:border-amber-900">
+                    <p class="font-bold text-slate-800 dark:text-slate-200 mb-3">3. ถ้านักเรียนต้องการวาดภาพ "สุนัข" ให้เพื่อนทายง่ายที่สุด ควรวาดลักษณะใดที่สำคัญที่สุด?</p>
+                    <div class="space-y-2 text-sm">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 hover:bg-amber-100/50 dark:hover:bg-amber-900/40 rounded-lg">
+                            <input type="radio" name="q3" value="a" class="w-4 h-4 text-amber-500">
+                            <span class="text-slate-700 dark:text-slate-300">ก. มี 4 ขา มีหู และมีหาง</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 hover:bg-amber-100/50 dark:hover:bg-amber-900/40 rounded-lg">
+                            <input type="radio" name="q3" value="b" class="w-4 h-4 text-amber-500">
+                            <span class="text-slate-700 dark:text-slate-300">ข. สีขนทุกเส้นและลายจุดบนหลัง</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Q4 -->
+                <div class="p-5 bg-amber-50/50 dark:bg-amber-950/30 rounded-2xl border border-amber-100 dark:border-amber-900">
+                    <p class="font-bold text-slate-800 dark:text-slate-200 mb-3">4. สิ่งใดจัดเป็น "สิ่งที่ไม่จำเป็น" เมื่อนักเรียนจัดกระเป๋ามาโรงเรียน?</p>
+                    <div class="space-y-2 text-sm">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 hover:bg-amber-100/50 dark:hover:bg-amber-900/40 rounded-lg">
+                            <input type="radio" name="q4" value="a" class="w-4 h-4 text-amber-500">
+                            <span class="text-slate-700 dark:text-slate-300">ก. ดินสอและสมุดเรียน</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 hover:bg-amber-100/50 dark:hover:bg-amber-900/40 rounded-lg">
+                            <input type="radio" name="q4" value="b" class="w-4 h-4 text-amber-500">
+                            <span class="text-slate-700 dark:text-slate-300">ข. ของเล่นชิ้นใหญ่และหุ่นยนต์บังคับ</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Q5 -->
+                <div class="p-5 bg-amber-50/50 dark:bg-amber-950/30 rounded-2xl border border-amber-100 dark:border-amber-900">
+                    <p class="font-bold text-slate-800 dark:text-slate-200 mb-3">5. ทำไมเราจึงต้องคัดเลือกสิ่งที่ไม่จำเป็นออกไปก่อนแก้ปัญหา?</p>
+                    <div class="space-y-2 text-sm">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 hover:bg-amber-100/50 dark:hover:bg-amber-900/40 rounded-lg">
+                            <input type="radio" name="q5" value="a" class="w-4 h-4 text-amber-500">
+                            <span class="text-slate-700 dark:text-slate-300">ก. เพื่อช่วยให้แก้ปัญหาได้รวดเร็วและไม่สับสน</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 hover:bg-amber-100/50 dark:hover:bg-amber-900/40 rounded-lg">
+                            <input type="radio" name="q5" value="b" class="w-4 h-4 text-amber-500">
+                            <span class="text-slate-700 dark:text-slate-300">ข. เพื่อให้กระเป๋าหนักขึ้นและเหนื่อยมากขึ้น</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button onclick="submitPreTest()" class="bg-amber-500 hover:bg-amber-600 text-white font-bold px-8 py-3 rounded-full shadow-lg transition text-base">
+                        <i class="fa-solid fa-paper-plane mr-2"></i> ส่งคำตอบแบบทดสอบก่อนเรียน
+                    </button>
+                </div>
+                <div id="pretest-score-result" class="text-center font-bold text-lg hidden text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 p-4 rounded-2xl border border-emerald-200 dark:border-emerald-800"></div>
+            </div>
+        </section>
+
+        <section id="board" class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-10 border-2 border-sky-100 dark:border-sky-900 shadow-sm transition-colors">
+            <div class="flex items-center space-x-3 mb-6">
+                <div class="bg-sky-100 dark:bg-sky-900/60 text-sky-500 dark:text-sky-300 p-3 rounded-2xl text-xl">
+                    <i class="fa-solid fa-comments"></i>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold text-slate-800 dark:text-slate-100">กระดานความรู้แลกเปลี่ยนก่อนเข้าคาบเรียน</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">พูดคุยทักทาย หรือแสดงความคิดเห็น: "เด็กๆ เคยจัดกระเป๋าเดินทางด้วยตัวเองไหมคะ? นำอะไรไปบ้าง?"</p>
+                </div>
+            </div>
+
+            <div class="space-y-4 mb-6">
+                <div class="flex gap-3">
+                    <input type="text" id="board-msg" placeholder="พิมพ์ข้อความแลกเปลี่ยนความรู้ตรงนี้..." class="flex-1 px-4 py-3 rounded-xl border border-sky-200 dark:border-sky-800 focus:outline-none focus:ring-2 focus:ring-sky-400 bg-sky-50/30 dark:bg-slate-900 text-slate-800 dark:text-slate-100 text-sm">
+                    <button onclick="postMessage()" class="bg-sky-500 hover:bg-sky-600 text-white font-bold px-6 py-3 rounded-xl transition text-sm flex items-center gap-2 shadow-md">
+                        <i class="fa-solid fa-paper-plane"></i> โพสต์
+                    </button>
+                </div>
+            </div>
+
+            <!-- Message feed -->
+            <div id="message-feed" class="space-y-3 max-h-60 overflow-y-auto pr-2">
+                <div class="bg-slate-50 dark:bg-slate-900/60 p-4 rounded-2xl border border-slate-100 dark:border-slate-700 text-sm">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="font-bold text-sky-600 dark:text-sky-400"><i class="fa-solid fa-robot mr-1"></i> พี่หุ่นยนต์ AI (คุณครู)</span>
+                        <span class="text-xs text-slate-400">วันนี้ 08:00 น.</span>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-300">สวัสดีจ้าเด็กๆ ทุกคน เตรียมสมุดและดินสอให้พร้อม แล้วมาสนุกกับบทเรียนวิทยาการคำนวณกันนะจ๊ะ!</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="lessons" class="space-y-6">
+            <div class="text-center">
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-800 dark:text-slate-100 mb-2">บทเรียนออนไลน์ 3 บทเรียนย่อย</h3>
+                <p class="text-slate-500 dark:text-slate-400">คลิกศึกษาบทเรียนสนุกๆ ทีละบทกันเลย!</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Lesson 1 -->
+                <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 border-2 border-emerald-100 dark:border-emerald-900 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                    <div>
+                        <div class="w-16 h-16 bg-emerald-100 dark:bg-emerald-900/60 text-emerald-600 dark:text-emerald-400 rounded-2xl flex items-center justify-center text-3xl mb-4">
+                            <i class="fa-solid fa-suitcase-rolling"></i>
+                        </div>
+                        <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-3 py-1 rounded-full">บทเรียนที่ 1</span>
+                        <h4 class="text-xl font-bold text-slate-800 dark:text-slate-100 mt-2 mb-2">อันไหนจำเป็น... อันไหนไม่จำเป็นนะ?</h4>
+                        <p class="text-slate-600 dark:text-slate-300 text-sm mb-4">ฝึกสังเกตสถานการณ์จำลอง เช่น การจัดกระเป๋าไปเที่ยวทะเล ควรเลือกหยิบอะไรใส่กระเป๋าดี?</p>
+                    </div>
+                    <button onclick="openModal('lesson1')" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2.5 rounded-xl transition text-sm flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-book-reader"></i> เข้าสู่บทเรียน
+                    </button>
+                </div>
+
+                <!-- Lesson 2 -->
+                <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 border-2 border-purple-100 dark:border-purple-900 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                    <div>
+                        <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900/60 text-purple-600 dark:text-purple-400 rounded-2xl flex items-center justify-center text-3xl mb-4">
+                            <i class="fa-solid fa-paw"></i>
+                        </div>
+                        <span class="text-xs font-bold text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-950 px-3 py-1 rounded-full">บทเรียนที่ 2</span>
+                        <h4 class="text-xl font-bold text-slate-800 dark:text-slate-100 mt-2 mb-2">จับคู่ความจริง สิ่งที่ใช่</h4>
+                        <p class="text-slate-600 dark:text-slate-300 text-sm mb-4">แยกแยะลักษณะสำคัญของสิ่งรอบตัว เช่น ลักษณะเด่นของสัตว์เลี้ยงตัวจริงกับหุ่นยนต์</p>
+                    </div>
+                    <button onclick="openModal('lesson2')" class="w-full bg-purple-500 hover:bg-purple-600 text-white font-bold py-2.5 rounded-xl transition text-sm flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-book-reader"></i> เข้าสู่บทเรียน
+                    </button>
+                </div>
+
+                <!-- Lesson 3 -->
+                <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 border-2 border-amber-100 dark:border-amber-900 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                    <div>
+                        <div class="w-16 h-16 bg-amber-100 dark:bg-amber-900/60 text-amber-600 dark:text-amber-400 rounded-2xl flex items-center justify-center text-3xl mb-4">
+                            <i class="fa-solid fa-user-detective"></i>
+                        </div>
+                        <span class="text-xs font-bold text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950 px-3 py-1 rounded-full">บทเรียนที่ 3</span>
+                        <h4 class="text-xl font-bold text-slate-800 dark:text-slate-100 mt-2 mb-2">นักสืบน้อยแก้ปัญหา</h4>
+                        <p class="text-slate-600 dark:text-slate-300 text-sm mb-4">เลือกส่วนประกอบสำคัญเพื่อวาดภาพสิ่งของ ให้เพื่อนทายได้ง่ายที่สุดโดยไม่ต้องลงรายละเอียดเยอะ</p>
+                    </div>
+                    <button onclick="openModal('lesson3')" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-2.5 rounded-xl transition text-sm flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-book-reader"></i> เข้าสู่บทเรียน
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="activity" class="bg-gradient-to-r from-sky-400 to-blue-500 dark:from-sky-900 dark:to-blue-950 rounded-3xl p-8 text-white shadow-lg">
+            <div class="max-w-2xl mx-auto text-center space-y-4">
+                <div class="bg-white/20 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto text-3xl">
+                    <i class="fa-solid fa-gamepad"></i>
+                </div>
+                <h3 class="text-2xl sm:text-3xl font-extrabold">มินิเกมฝึกคิด: "เลือกของใส่กระเป๋าไปเที่ยวทะเล"</h3>
+                <p class="text-sky-100 text-sm sm:text-base">
+                    เด็กๆ มาช่วยพี่หุ่นยนต์เลือกสิ่งของที่จำเป็นจริงๆ สำหรับไปเที่ยวทะเลกันเถอะ! ลองคลิกเล่นเกมจำลองสถานการณ์สั้นๆ ด้านล่างนี้ได้เลย
+                </p>
+                <div class="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 p-6 rounded-2xl shadow-md text-left mt-4">
+                    <h4 class="font-bold text-lg mb-3 text-sky-600 dark:text-sky-400"><i class="fa-solid fa-circle-question mr-2"></i> สถานการณ์: วันนี้แดดจ้ามาก เราจะไปเล่นน้ำทะเล</h4>
+                    <p class="text-sm text-slate-600 dark:text-slate-300 mb-4">คลิกเลือกสิ่งของที่ถูกต้อง 3 อย่าง:</p>
+                    <div id="game-options" class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+                        <button onclick="selectItem(this, true)" class="p-3 border-2 border-slate-200 dark:border-slate-700 rounded-xl hover:border-sky-500 font-medium text-sm flex flex-col items-center gap-1 transition">
+                            <span class="text-2xl">🩱</span> ชุดว่ายน้ำ
+                        </button>
+                        <button onclick="selectItem(this, false)" class="p-3 border-2 border-slate-200 dark:border-slate-700 rounded-xl hover:border-sky-500 font-medium text-sm flex flex-col items-center gap-1 transition">
+                            <span class="text-2xl">🧸</span> ตุ๊กตาหมีตัวใหญ่
+                        </button>
+                        <button onclick="selectItem(this, true)" class="p-3 border-2 border-slate-200 dark:border-slate-700 rounded-xl hover:border-sky-500 font-medium text-sm flex flex-col items-center gap-1 transition">
+                            <span class="text-2xl">🧴</span> ครีมกันแดด
+                        </button>
+                        <button onclick="selectItem(this, true)" class="p-3 border-2 border-slate-200 dark:border-slate-700 rounded-xl hover:border-sky-500 font-medium text-sm flex flex-col items-center gap-1 transition">
+                            <span class="text-2xl">👓</span> แว่นกันแดด
+                        </button>
+                    </div>
+                    <div id="game-result" class="text-center font-bold text-sm text-emerald-600 dark:text-emerald-400 hidden">
+                        ยอดเยี่ยมมาก! 🎉 หนูเลือกสิ่งของที่จำเป็นสำหรับไปทะเลได้ถูกต้องครบถ้วนแล้ว!
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="submit-work" class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-10 border-2 border-pink-100 dark:border-pink-900 shadow-sm transition-colors">
+            <div class="flex items-center space-x-3 mb-6">
+                <div class="bg-pink-100 dark:bg-pink-900/60 text-pink-500 dark:text-pink-300 p-3 rounded-2xl text-xl">
+                    <i class="fa-solid fa-upload"></i>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold text-slate-800 dark:text-slate-100">ส่งงาน / ส่งการบ้านออนไลน์</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">หลังจากทำกิจกรรมเสร็จแล้ว ส่งผลงานหรือแจ้งชื่อเพื่อบันทึกคะแนนเก็บได้ที่นี่จ้า</p>
+                </div>
+            </div>
+
+            <div class="bg-pink-50/50 dark:bg-pink-950/30 p-6 rounded-2xl border border-pink-100 dark:border-pink-900 space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-1">เลือกชิ้นงานที่ส่ง:</label>
+                        <select id="work-type" class="w-full px-4 py-3 rounded-xl border border-pink-200 dark:border-pink-800 focus:outline-none focus:ring-2 focus:ring-pink-400 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 text-sm">
+                            <option value="กิจกรรมจัดกระเป๋าไปทะเล">กิจกรรมจัดกระเป๋าไปทะเล (มินิเกม)</option>
+                            <option value="แบบฝึกหัดวาดรูปแมวสำคัญ">แบบฝึกหัดวาดรูปแมวคัดเลือกคุณลักษณะ</option>
+                            <option value="แบบทดสอบวัดผล">แบบทดสอบหลังเรียน</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-1">แนบรูปภาพผลงาน / ข้อความ:</label>
+                        <input type="text" id="work-note" placeholder="พิมพ์ข้อความยืนยัน หรือลิงก์ผลงานของคุณครู" class="w-full px-4 py-3 rounded-xl border border-pink-200 dark:border-pink-800 focus:outline-none focus:ring-2 focus:ring-pink-400 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 text-sm">
+                    </div>
+                </div>
+                <div class="text-center pt-2">
+                    <button onclick="submitHomework()" class="bg-pink-500 hover:bg-pink-600 text-white font-bold px-8 py-3 rounded-full shadow-lg transition text-base">
+                        <i class="fa-solid fa-cloud-arrow-up mr-2"></i> กดส่งงานให้คุณครู
+                    </button>
+                </div>
+                <div id="submit-success-msg" class="text-center font-bold text-sm text-emerald-600 dark:text-emerald-400 hidden"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-800 dark:bg-slate-950 text-white text-center py-6 mt-16 text-sm transition-colors">
+        <p>&copy; 2026 บทเรียนออนไลน์วิชาวิทยาการคำนวณ ป.1 | ออกแบบด้วยความรักเพื่อเด็กๆ ทุกคน 🌟</p>
+    </footer>
+
+    <div id="lessonModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-lg w-full p-6 sm:p-8 relative shadow-2xl transition-colors">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 text-2xl font-bold">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="modal-content">
+                <!-- Dynamic content loaded via JS -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle Function
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeIcon = document.getElementById('theme-icon');
+            if(html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                html.classList.add('light');
+                themeIcon.className = 'fa-solid fa-moon text-lg';
+            } else {
+                html.classList.remove('light');
+                html.classList.add('dark');
+                themeIcon.className = 'fa-solid fa-sun text-lg';
+            }
+        }
+
+        // Store student registration state
+        let currentStudent = { name: "", classRoom: "", number: "" };
+
+        function saveStudentInfo() {
+            const name = document.getElementById('student-name').value.trim();
+            const cls = document.getElementById('student-class').value.trim();
+            const no = document.getElementById('student-no').value.trim();
+
+            if(!name || !no) {
+                showCustomMessage("กรุณากรอกชื่อ-นามสกุล และเลขที่ให้ครบถ้วนก่อนบันทึกนะจ๊ะ!");
+                return;
+            }
+
+            currentStudent = { name, classRoom: cls, number: no };
+            showCustomMessage(`บันทึกข้อมูลเรียบร้อย! 🎉 ยินดีต้อนรับ ${name} (เลขที่ ${no} ห้อง ${cls}) เข้าสู่บทเรียนค่ะ`);
+        }
+
+        function submitPreTest() {
+            if(!currentStudent.name) {
+                showCustomMessage("กรุณาลงทะเบียนชื่อและเลขที่ด้านบนก่อนส่งแบบทดสอบนะจ๊ะ!");
+                return;
+            }
+
+            // Correct answers for Pre-test: Q1:a, Q2:b, Q3:a, Q4:b, Q5:a
+            const answers = { q1: 'a', q2: 'b', q3: 'a', q4: 'b', q5: 'a' };
+            let score = 0;
+
+            for(let q in answers) {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                if(selected && selected.value === answers[q]) {
+                    score++;
+                }
+            }
+
+            const resultDiv = document.getElementById('pretest-score-result');
+            resultDiv.classList.remove('hidden');
+            resultDiv.innerHTML = `เก่งมากค่ะ ${currentStudent.name} (เลขที่ ${currentStudent.number})! คะแนนแบบทดสอบก่อนเรียนของหนูคือ: <b>${score} / 5 คะแนน</b> 🌟`;
+        }
+
+        function postMessage() {
+            const input = document.getElementById('board-msg');
+            const msg = input.value.trim();
+            if(!msg) return;
+
+            if(!currentStudent.name) {
+                showCustomMessage("แนะนำให้ลงทะเบียนชื่อและเลขที่ก่อนโพสต์ข้อความนะจ๊ะ");
+                return;
+            }
+
+            const feed = document.getElementById('message-feed');
+            const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+            const newMsgHtml = `
+                <div class="bg-sky-50/50 dark:bg-slate-900/60 p-4 rounded-2xl border border-sky-100 dark:border-slate-700 text-sm animate-fade-in">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="font-bold text-sky-600 dark:text-sky-400"><i class="fa-solid fa-user-graduate mr-1"></i> ${currentStudent.name} (เลขที่ ${currentStudent.number})</span>
+                        <span class="text-xs text-slate-400">วันนี้ ${timeStr}</span>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-300">${escapeHtml(msg)}</p>
+                </div>
+            `;
+            feed.insertAdjacentHTML('afterbegin', newMsgHtml);
+            input.value = '';
+        }
+
+        function escapeHtml(text) {
+            return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+
+        function submitHomework() {
+            if(!currentStudent.name) {
+                showCustomMessage("กรุณากรอกชื่อและเลขที่ในส่วน 'ลงทะเบียน' ด้านบนก่อนกดส่งงานนะคะ!");
+                return;
+            }
+
+            const workType = document.getElementById('work-type').value;
+            const note = document.getElementById('work-note').value;
+            const successDiv = document.getElementById('submit-success-msg');
+
+            successDiv.classList.remove('hidden');
+            successDiv.innerHTML = `✅ ส่งงานสำเร็จเรียบร้อยแล้ว! ชื่อ: ${currentStudent.name} (เลขที่ ${currentStudent.number}) งาน: ${workType} บันทึกคะแนนลงในระบบเรียบร้อยจ้า 🎉`;
+        }
+
+        // Modal content data for lessons
+        const lessonsData = {
+            lesson1: {
+                title: "บทเรียนที่ 1: อันไหนจำเป็น... อันไหนไม่จำเป็นนะ?",
+                icon: "fa-suitcase-rolling",
+                color: "text-emerald-600 dark:text-emerald-400",
+                desc: "ในการเดินทางไปเที่ยวทะเล สิ่งที่จำเป็นที่สุดคือชุดว่ายน้ำ ครีมกันแดด และแว่นกันแดด ส่วนตุ๊กตาตัวใหญ่หรือของเล่นชิ้นโตถือเป็นสิ่งที่ไม่จำเป็นสำหรับการเดินทางท่องเที่ยวในทริปนี้ การที่เราเลือกเฉพาะสิ่งสำคัญช่วยให้เราจัดกระเป๋าได้เบาและรวดเร็วขึ้น!"
+            },
+            lesson2: {
+                title: "บทเรียนที่ 2: จับคู่ความจริง สิ่งที่ใช่",
+                icon: "fa-paw",
+                color: "text-purple-600 dark:text-purple-400",
+                desc: "เมื่อเราพูดถึงสุนัข สิ่งสำคัญคือ 'มี 4 ขา, เห่าได้, กินอาหาร และมีชีวิต' ส่วนสีของขนหรือลายจุดตามตัวถือเป็นรายละเอียดปลีกย่อยที่ไม่จำเป็นต้องนำมาคิดเมื่อเราต้องการอธิบายลักษณะของสุนัขโดยรวม"
+            },
+            lesson3: {
+                title: "บทเรียนที่ 3: นักสืบน้อยแก้ปัญหา",
+                icon: "fa-user-detective",
+                color: "text-amber-600 dark:text-amber-400",
+                desc: "เมื่อเราต้องการวาดรูปแมวให้เพื่อนทายง่ายๆ เราไม่ต้องวาดลวดลายพื้นหรือเส้นขนทุกเส้น แต่ให้เลือกวาดเฉพาะส่วนสำคัญ เช่น 'หูแหลมๆ, ตา, และหนวด' เพียงเท่านี้คนอื่นก็รู้ทันทีว่าเป็นรูปแมว!"
+            }
+        };
+
+        function openModal(lessonKey) {
+            const lesson = lessonsData[lessonKey];
+            const modal = document.getElementById('lessonModal');
+            const content = document.getElementById('modal-content');
+            
+            content.innerHTML = `
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="text-3xl ${lesson.color}"><i class="fa-solid ${lesson.icon}"></i></div>
+                    <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100">${lesson.title}</h3>
+                </div>
+                <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-6 bg-slate-50 dark:bg-slate-900/60 p-4 rounded-2xl border border-slate-100 dark:border-slate-700">${lesson.desc}</p>
+                <button onclick="closeModal()" class="w-full bg-slate-800 dark:bg-slate-700 hover:bg-slate-900 dark:hover:bg-slate-600 text-white font-bold py-2.5 rounded-xl transition">
+                    เข้าใจแล้วจ้า! 🌟
+                </button>
+            `;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('lessonModal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+
+        let selectedCount = 0;
+        function selectItem(btn, isCorrect) {
+            if(btn.classList.contains('bg-emerald-100') || btn.classList.contains('bg-rose-100')) return;
+
+            if(isCorrect) {
+                btn.classList.remove('border-slate-200', 'dark:border-slate-700');
+                btn.classList.add('bg-emerald-100', 'dark:bg-emerald-950', 'border-emerald-500', 'text-emerald-800', 'dark:text-emerald-300');
+                selectedCount++;
+                if(selectedCount === 3) {
+                    document.getElementById('game-result').classList.remove('hidden');
+                }
+            } else {
+                btn.classList.remove('border-slate-200', 'dark:border-slate-700');
+                btn.classList.add('bg-rose-100', 'dark:bg-rose-950', 'border-rose-500', 'text-rose-800', 'dark:text-rose-300');
+                showCustomMessage("ช้าก่อน! ตุ๊กตาตัวใหญ่เกินไปและไม่จำเป็นสำหรับการเล่นน้ำทะเล ลองเลือกใหม่อีกครั้งนะจ๊ะ");
+            }
+        }
+
+        function showCustomMessage(msg) {
+            const modal = document.getElementById('lessonModal');
+            const content = document.getElementById('modal-content');
+            content.innerHTML = `
+                <div class="text-center space-y-4">
+                    <div class="text-amber-500 text-4xl"><i class="fa-solid fa-lightbulb"></i></div>
+                    <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100">ประกาศจากระบบห้องเรียน</h3>
+                    <p class="text-slate-600 dark:text-slate-300 bg-amber-50 dark:bg-amber-950/40 p-4 rounded-2xl border border-amber-100 dark:border-amber-900">${msg}</p>
+                    <button onclick="closeModal()" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-2.5 rounded-xl transition">
+                        ตกลง
+                    </button>
+                </div>
+            `;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+    </script>
+</body>
+</html>
